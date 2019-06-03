@@ -19,7 +19,7 @@ class SCNVector3(Structure):
 load_framework('SceneKit')
 load_framework('ARKit')
 with open('token.txt') as f:
-    API_KEY = f.read()
+    API_KEY = f.read().replace('\n', '')
 
 URL = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key={0}&lat={1}&lng={2}&range=5&format=json'
 
@@ -164,7 +164,7 @@ def get_text(text, x, y, z):
     text_mesh = SCNText.textWithString_extrusionDepth_(text, 3.0)
     text_mesh.setFlatness_(0.2)
     text_mesh.setChamferRadius_(0.4)
-    text_mesh.setFont_(UIFont.fontWithName_size_('HelveticaNeue-Bold', 15))
+    text_mesh.setFont_(UIFont.fontWithName_size_('HoeflerText-Black', 15))
     bbox_min, bbox_max = SCNVector3(), SCNVector3()
     text_mesh.getBoundingBoxMin_max_(byref(bbox_min), byref(bbox_max), restype=None,
                                      argtypes=[POINTER(SCNVector3), POINTER(SCNVector3)])
@@ -292,4 +292,3 @@ if __name__ == '__main__':
     v = MyARView()
     v.present('full_screen', hide_title_bar=True, orientations=['portrait'])
     v.initialize(0)
-
